@@ -17,4 +17,4 @@ Users can search for a project and using some type of ranking algorithim, the be
 - Cool animations for the pro-con list to make it engaging. Maybe like a Court Simulation (saw this at a Hackathon and it was pretty cool).
 - The user can purchase from within the extension (need to figure out security). 
   
-![alt text](https://github.com/jotigokaraju/major-rpoject-cs-30/blob/main/textures/Diagram.png?raw=true)
+![alt text](/textures/Diagram.png)
