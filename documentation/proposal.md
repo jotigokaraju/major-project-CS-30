@@ -16,5 +16,7 @@ Users can search for a project and using some type of ranking algorithim, the be
 - Should be free, ideally.
 - Cool animations for the pro-con list to make it engaging. Maybe like a Court Simulation (saw this at a Hackathon and it was pretty cool).
 - The user can purchase from within the extension (need to figure out security). 
-  
+
+## Diagram
+
 ![alt text](/textures/Diagram.png)
