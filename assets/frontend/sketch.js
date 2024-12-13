@@ -1,12 +1,12 @@
+//2024-12-11
+
 let analysisResult = '';  // Variable to store the result of the analysis
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
-  background(220);
-  
   // Display the analysis result on the canvas
   textSize(16);
   fill(0);

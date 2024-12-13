@@ -6,3 +6,14 @@ html, body {
 canvas {
   display: block;
 }
+
+h1 {
+  margin-top: 1.6cm;
+  text-align: center;
+  border: 0.25cm;
+  border-style: dashed;
+  border-color: black;
+  padding: 2cm;
+  margin-left: 5cm;
+  margin-right: 5cm;
+}
