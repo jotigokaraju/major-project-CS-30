@@ -26,7 +26,7 @@ async function analyzeURL() {
     let response = await fetch('http://localhost:3000/api/pdf/analyze', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url })
+      body: JSON.stringify({url})
     });
 
     //Receive from backend
