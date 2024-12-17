@@ -1,0 +1,14 @@
+{
+    "name": "CodingJS Problem Helper",
+    "version": "1.0.0",
+    "description": "Extension to Help in Solutions to CodingJS Problems",
+    "manifest_version": 3,
+    "author": "Jotiraditya Gokaraju",
+    "action": {
+      "default_popup": "index.html",
+      "default_title": "CodingJS Helper"
+    },
+    "permissions": ["activeTab", "scripting", "storage"],
+    "host_permissions": ["https://codingjs.wmcicompsci.ca/*"]
+  }
+  

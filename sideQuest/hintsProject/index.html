@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodingJS Helper</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CodingJS Helper</h1>
+        </header>
+        
+        <section id="search-container">
+            <input type="text" id="problem-name" placeholder="Enter problem name..." />
+            <button id="search-btn">Search</button>
+        </section>
+
+        <section id="problem-container">
+            <h2 id="problem-title">Problem: <span></span></h2>
+            <div id="question-container">
+                <h3>Question:</h3>
+                <p id="question"></p>
+            </div>
+            
+            <div id="inputs-container">
+                <h3>Sample Inputs:</h3>
+                <ul id="inputs-list"></ul>
+            </div>
+            
+            <div id="solution-container">
+                <h3>Solution:</h3>
+                <pre id="solution-body"></pre>
+            </div>
+        </section>
+        
+        <footer>
+            <p>&copy; 2024 Joti Gokaraju. All rights reserved.</p>
+        </footer>
+    </div>
+    <script type="module" src="displayAll.js"></script>
+</body>
+</html>
