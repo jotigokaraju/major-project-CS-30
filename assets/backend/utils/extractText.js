@@ -1,10 +1,11 @@
 //2024-12-10
 
-const pdfjsLib = require('pdfjs-dist/es5/build/pdf');  //Import PDF.js to parse PDF files
+import pkg from '../node_modules/pdfjs-dist/build/pdf.js';
+const {getDocument} = pkg;
 
 // Function to extract text from a PDF URL
-async function extractTextFromPDF(pdfUrl) {
-  let loadingTask = pdfjsLib.getDocument(pdfUrl);  //Load the PDF from the URL
+export async function extractTextFromPDF(pdfUrl) {
+  let loadingTask = getDocument(pdfUrl);  //Load the PDF from the URL
   let pdfDocument = await loadingTask.promise;     //Get the PDF document
 
   let fullText = '';  //Initialize an empty string to store the full text
@@ -18,5 +19,3 @@ async function extractTextFromPDF(pdfUrl) {
 
   return fullText;  //Return the extracted text
 }
-
-module.exports = { extractTextFromPDF };

@@ -5,23 +5,41 @@ const express = require('express');
 const router = express.Router();
 
 //Call f(x) from the utilities module
-let {extractTextFromPDF} = require('../utils/extractText');
-let {analyzeTextWithOpenAI} = require('../utils/openAI');
+import {searchLinks} from '../utils/searchForLinks.js';
+import {extractTextFromPDF} from '../utils/extractText.js';
+import {analyzeTextWithOpenAI} from '../utils/openAI.js';
 
 
 router.post('/analyze', async (req, res) => {
-  const {url} = req.body;
+  const {searchQuery} = req.body;
 
   try {
 
-    //Extract text from the PDF located at the given URL
-    let pdfText = await extractTextFromPDF(url);
+    let mapOfTitlesAndURLs = await searchLinks(searchQuery);
+
+    let url = [];
+
+    for (let i = 0; i < searchResults.length; i++) {
+      url.push(mapOfTitlesAndURLs[i].link); 
+    }
+
+    let finalResult = ""; 
+
+    for (let link of url) {
+
+      //Extract text from the PDF located at the given URL
+      let pdfText = await extractTextFromPDF(link);
+      console.log(pdfText);
+      
+      //Analyze the extracted text using OpenAI
+      //let analysis = await analyzeTextWithOpenAI(pdfText);
+
+      //finalResult += ("Next Entry " + analysis + ". ");
+
+    }
     
-    //Analyze the extracted text using OpenAI
-    let analysis = await analyzeTextWithOpenAI(pdfText);
-    
-    //Send back
-    res.json({ analysis });
+
+    res.json({finalResult});
   } 
   
   catch (error) {

@@ -8,7 +8,7 @@ let openai = new OpenAI({
 });
 
 //Function to analyze text using OpenAI GPT
-async function analyzeTextWithOpenAI(text) {
+async function analyzeTextWithOpenAI(text, prompt) {
 
   try {
 
@@ -16,7 +16,7 @@ async function analyzeTextWithOpenAI(text) {
     //I'll note that a large majority of this is online code that I pulled from Stack Overflow, Tutorials, even some Reddit
     let response = await openai.completions.create({
       model: 'text-davinci-003',  
-      prompt: `Extract key features, reviews, and pricing from the following text:\n\n${text}`,
+      prompt: `${prompt}:\n\n${text}`,
       max_tokens: 1000,
       temperature: 0.5,
     });
