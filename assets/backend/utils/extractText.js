@@ -4,7 +4,7 @@ import pkg from '../node_modules/pdfjs-dist/build/pdf.js';
 const {getDocument} = pkg;
 
 // Function to extract text from a PDF URL
-export async function extractTextFromPDF(pdfUrl) {
+async function extractTextFromPDF(pdfUrl) {
   let loadingTask = getDocument(pdfUrl);  //Load the PDF from the URL
   let pdfDocument = await loadingTask.promise;     //Get the PDF document
 
@@ -17,5 +17,8 @@ export async function extractTextFromPDF(pdfUrl) {
     fullText += textContent.items.map(item => item.str).join(' ');  //Strip
   }
 
+  console.log(fullText)
   return fullText;  //Return the extracted text
 }
+
+extractTextFromPDF('../temp/output.pdf')

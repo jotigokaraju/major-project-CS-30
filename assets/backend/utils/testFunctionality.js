@@ -4,8 +4,8 @@
 
 //Call f(x) from the utilities module
 import {searchLinks} from '../utils/searchForLinks.js';
+import {HTML2PDF} from '../utils/convertToPDF.js'
 import {extractTextFromPDF} from '../utils/extractText.js';
-//import {analyzeTextWithOpenAI} from '../utils/openAI.js';
 
 
 let mapOfTitlesAndURLs = await searchLinks("Hello");
@@ -20,14 +20,10 @@ let finalResult = "";
 
 for (let link of url) {
 
-    //Extract text from the PDF located at the given URL
-    let pdfText = await extractTextFromPDF(link);
+    let pdf = await HTML2PDF(link)
+    let pdfText = await extractTextFromPDF(pdf);
     console.log(pdfText);
     
-    //Analyze the extracted text using OpenAI
-    //let analysis = await analyzeTextWithOpenAI(pdfText);
-
-    //finalResult += ("Next Entry " + analysis + ". ");
 
 }
 
