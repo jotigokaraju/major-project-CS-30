@@ -1,10 +1,13 @@
 //2024-12-10
 
 import pkg from '../node_modules/pdfjs-dist/build/pdf.js';
+import fs from 'fs';
+import path from 'path';
+
 const {getDocument} = pkg;
 
 // Function to extract text from a PDF URL
-async function extractTextFromPDF(pdfUrl) {
+export async function extractTextFromPDF(pdfUrl) {
   let loadingTask = getDocument(pdfUrl);  //Load the PDF from the URL
   let pdfDocument = await loadingTask.promise;     //Get the PDF document
 
@@ -17,8 +20,22 @@ async function extractTextFromPDF(pdfUrl) {
     fullText += textContent.items.map(item => item.str).join(' ');  //Strip
   }
 
-  console.log(fullText)
+  //console.log(fullText)
   return fullText;  //Return the extracted text
 }
 
-extractTextFromPDF('../temp/output.pdf')
+//Function to Delete Temporary PDF
+export async function deletePDF(pdfUrl) {
+
+    const resolvedPath = path.resolve(pdfUrl);
+
+
+    fs.unlink(resolvedPath, (err) => {
+        if (err) {
+            console.error(`Error deleting file at ${resolvedPath}:`, err);
+        } else {
+            console.log(`Successfully deleted file at ${resolvedPath}`);
+        }
+    });
+}
+

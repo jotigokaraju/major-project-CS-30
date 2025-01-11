@@ -5,26 +5,37 @@
 //Call f(x) from the utilities module
 import {searchLinks} from '../utils/searchForLinks.js';
 import {HTML2PDF} from '../utils/convertToPDF.js'
-import {extractTextFromPDF} from '../utils/extractText.js';
+import {extractTextFromPDF, deletePDF} from '../utils/extractText.js';
 
 
-let mapOfTitlesAndURLs = await searchLinks("Hello");
+let mapOfTitlesAndURLs = await searchLinks("Nialan Young Saskatoon High School");
 
 let url = [];
 
 for (let i = 0; i < mapOfTitlesAndURLs.length; i++) {
     url.push(mapOfTitlesAndURLs[i].link); 
 }
+console.log(url);
 
-let finalResult = ""; 
+let result = [];
+let pdfLink, pdfText;
+let deletingList = [];
 
 for (let link of url) {
-
-    let pdf = await HTML2PDF(link)
-    let pdfText = await extractTextFromPDF(pdf);
-    console.log(pdfText);
-    
-
+    pdfLink = await HTML2PDF(link, url.indexOf(link))
+    pdfText = await extractTextFromPDF(pdfLink);
+    deletingList.push(pdfLink);
+    result.push(pdfText);
 }
+
+for (let del of deletingList) {
+  deletePDF(del);
+}
+
+console.log(result); 
+
+
+
+
 
 

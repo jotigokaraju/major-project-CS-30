@@ -8,7 +8,7 @@ export async function searchLinks(searchQuery) {
 
   try {
     
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({headless: false});
     const [page] = await browser.pages();
     await page.setRequestInterception(true);
     await page.setJavaScriptEnabled(false);
@@ -22,7 +22,7 @@ export async function searchLinks(searchQuery) {
       waitUntil: "domcontentloaded",
     });
 
-    await page.type("textarea", searchQuery);
+    await page.type("textarea", searchQuery, {delay: 150});
     await page.$eval('[aria-label="Google Search"]', el => el.click());
     const sel = ".Gx5Zad";
     await page.waitForSelector(sel);
@@ -37,13 +37,24 @@ export async function searchLinks(searchQuery) {
     );
 
     console.log(searchResults);
+
+    for (let i = 0; i < 100; i++) {
+      await page.mouse.wheel({
+        deltaY: i*1,
+      });
+    }
+
+    setTimeout(()=>{browser.close();},4000);
     return(searchResults); 
 
   }
 
   finally {
-    browser.close()
+    console.log("foo")
   }
+
+    
+  
 }
 
 
