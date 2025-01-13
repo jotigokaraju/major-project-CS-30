@@ -3,12 +3,20 @@
 
 
 //Call f(x) from the utilities module
-import {searchLinks} from '../utils/searchForLinks.js';
+import {pullLink, searchLinks} from '../utils/searchForLinks.js';
 import {HTML2PDF} from '../utils/convertToPDF.js'
 import {extractTextFromPDF, deletePDF} from '../utils/extractText.js';
+import puppeteer from 'puppeteer';
+import {toGoogle} from '../utils/login.js';
 
+//Set Browser for All Pages
+const browser = puppeteer.launch({headless: false});
 
-let mapOfTitlesAndURLs = await searchLinks("Nialan Young Saskatoon High School");
+//Sign-in Process
+
+let signInLink = await pullLink(browser, "Google Sign In");
+await toGoogle(browser, String(signInLink));
+let mapOfTitlesAndURLs = await searchLinks(browser, "Saskatoon High School");
 
 let url = [];
 
@@ -22,7 +30,7 @@ let pdfLink, pdfText;
 let deletingList = [];
 
 for (let link of url) {
-    pdfLink = await HTML2PDF(link, url.indexOf(link))
+    pdfLink = await HTML2PDF(browser, link, url.indexOf(link))
     pdfText = await extractTextFromPDF(pdfLink);
     deletingList.push(pdfLink);
     result.push(pdfText);

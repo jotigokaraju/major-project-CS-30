@@ -1,10 +1,10 @@
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+import {searchLinks, pullLink} from '../utils/searchForLinks.js';
 
 puppeteer.use(StealthPlugin());
 
-export async function toGoogle(link) {
-    const browser = await puppeteer.launch({ headless: false });
+export async function toGoogle(browser, link) {
     const page = await browser.newPage();
     
     try {
@@ -15,6 +15,7 @@ export async function toGoogle(link) {
         await page.goto(link);
         await page.waitForSelector('input[type="email"]')
         await page.type('input[type="email"]', 'alternatealternate31@gmail.com', {delay: 50});
+        
         await Promise.all([
             page.waitForNavigation(),
             await page.keyboard.press('Enter')
@@ -22,17 +23,23 @@ export async function toGoogle(link) {
 
         await page.waitForSelector('input[type="password"]', {visible: true});
         await page.type('input[type="password"]', '1234567890!a', {delay: 50});
+
+        await Promise.all([
+            page.waitForNavigation(),
+            await page.keyboard.press('Enter')
+        ]);
         
+    } catch(error) {
+        console.log(error);
     } finally {
-        await browser.close();
+        await page.close();
     }
 }
 
 
 //I used ChatGPT to look through the Facebook Login Page Stylesheet and tell me the css for the fields.
-//This may also be, not illegal, but 'extra-legal' since automated bot logins could violate the user agreement.
-export async function toFacebook(link) {
-    const browser = await puppeteer.launch({ headless: false });
+//This may also be 'extra-legal' since automated bot logins violate the user agreement.
+export async function toFacebook(browser, link) {
     const page = await browser.newPage();
 
     try {
@@ -53,11 +60,10 @@ export async function toFacebook(link) {
             page.waitForNavigation({ waitUntil: 'networkidle2' }),
         ]);
 
-    } catch (error) {
-        console.error("Error during login:", error);
-
+    } catch(error) {
+        console.log(error);
     } finally {
-        await browser.close();
+        await page.close();
     }
 }
 
@@ -82,5 +88,3 @@ export async function toLinkedIn(link) {
 
 
 }
-
-toLinkedIn(1);

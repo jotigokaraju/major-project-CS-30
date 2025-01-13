@@ -27,20 +27,14 @@ async function downloadPDF(url, outputPath) {
 }
 
 async function isPDFResponse(page, link) {
-  const response = await page.goto(link, { waitUntil: 'domcontentloaded' });
+  const response = await page.goto(link, {waitUntil: 'domcontentloaded'});
   const contentType = response.headers()['content-type'];
   return contentType && contentType.includes('application/pdf');
 }
 
 
-export async function HTML2PDF(link, number) {
+export async function HTML2PDF(browser, link, number) {
   const outputPath = `../temp/output_${number}.pdf`;
-
-
-  const browser = await launch({
-    headless: false,
-    args: ['--disable-blink-features=AutomationControlled']
-  });
 
   const page = await browser.newPage();
   await page.setUserAgent(
@@ -51,12 +45,12 @@ export async function HTML2PDF(link, number) {
 
   if (await isPDFResponse(page, link)) {
     console.log('PDF detected after loading. Downloading directly...');
-    await browser.close();
+    await page.close();
     await downloadPDF(link, outputPath);
   } else {
     console.log('Rendering page to PDF using Puppeteer...');
     await page.pdf({ path: outputPath, format: 'A4' });
-    await browser.close();
+    await page.close();
   }
 
   console.log(`PDF saved to: ${outputPath}`);
