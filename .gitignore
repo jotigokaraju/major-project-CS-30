@@ -1,3 +1,4 @@
 .env
-
 assets/backend/node_modules
+.txt
+assets/backend/temp
