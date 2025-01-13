@@ -10,19 +10,20 @@ import puppeteer from 'puppeteer';
 import {toGoogle} from '../utils/login.js';
 
 //Set Browser for All Pages
-const browser = puppeteer.launch({headless: false});
+const browser = await puppeteer.launch({headless: false});
 
 //Sign-in Process
 
 let signInLink = await pullLink(browser, "Google Sign In");
 await toGoogle(browser, String(signInLink));
-let mapOfTitlesAndURLs = await searchLinks(browser, "Saskatoon High School");
+let mapOfTitlesAndURLs = await searchLinks(browser, "Joti Gokaraju");
 
 let url = [];
 
 for (let i = 0; i < mapOfTitlesAndURLs.length; i++) {
     url.push(mapOfTitlesAndURLs[i].link); 
 }
+
 console.log(url);
 
 let result = [];
