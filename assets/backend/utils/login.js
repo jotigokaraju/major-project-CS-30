@@ -62,8 +62,6 @@ export async function toFacebook(browser, link) {
 
     } catch(error) {
         console.log(error);
-    } finally {
-        await page.close();
     }
 }
 

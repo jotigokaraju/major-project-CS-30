@@ -3,3 +3,4 @@ assets/backend/node_modules
 .txt
 assets/backend/temp
 model
+node_modules

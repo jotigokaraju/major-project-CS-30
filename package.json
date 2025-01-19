@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@tensorflow-models/qna": "^1.0.2",
+    "express": "^4.21.2",
     "pdfjs-dist": "^4.9.155",
     "puppeteer": "^23.10.4"
   }

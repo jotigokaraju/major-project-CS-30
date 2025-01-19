@@ -1,6 +1,6 @@
 import fs from 'fs';
 import https from 'https';
-import { launch } from 'puppeteer';
+import puppeteer, { launch } from 'puppeteer';
 
 
 async function downloadPDF(url, outputPath) {
@@ -34,9 +34,12 @@ async function isPDFResponse(page, link) {
 
 
 export async function HTML2PDF(browser, link, number) {
+
   const outputPath = `../temp/output_${number}.pdf`;
 
   const page = await browser.newPage();
+
+
   await page.setUserAgent(
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'
   );
@@ -48,8 +51,9 @@ export async function HTML2PDF(browser, link, number) {
     await page.close();
     await downloadPDF(link, outputPath);
   } else {
-    console.log('Rendering page to PDF using Puppeteer...');
-    await page.pdf({ path: outputPath, format: 'A4' });
+    
+    await page.pdf({path: outputPath, format: 'A4'});
+
     await page.close();
   }
 

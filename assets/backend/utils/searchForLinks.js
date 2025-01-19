@@ -50,12 +50,7 @@ export async function searchLinks(browser, searchQuery) {
   catch(error) {
     console.log(error);
   }
-
-  finally {
-    page.close();
-  }
-
-    
+  
   
 }
 
