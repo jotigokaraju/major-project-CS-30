@@ -1,31 +1,19 @@
-//2024-12-10
+import dotenv from 'dotenv';
+dotenv.config();
+console.log(process.env.API_KEY);
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const {OpenAI} = require('openai');  
 
 
-let openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY  
-});
+export async function textGenTextOnlyPrompt(prompt) {
 
-//Function to analyze text using OpenAI GPT
-async function analyzeTextWithOpenAI(text, prompt) {
+  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  try {
+  const result = await model.generateContent(prompt);
+  console.log(result.response.text());
 
-    //Send the extracted text to OpenAI for analysis
-    //I'll note that a large majority of this is online code that I pulled from Stack Overflow, Tutorials, even some Reddit
-    let response = await openai.completions.create({
-      model: 'text-davinci-003',  
-      prompt: `${prompt}:\n\n${text}`,
-      max_tokens: 1000,
-      temperature: 0.5,
-    });
-
-    return response.choices[0].text;
-  } catch (error) {
-    console.error('OpenAI error:', error);
-    throw new Error('Failed to analyze the text with OpenAI');
-  }
 }
 
-module.exports = {analyzeTextWithOpenAI};
+
+

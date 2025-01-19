@@ -14,8 +14,8 @@ const browser = await puppeteer.launch({headless: false});
 
 //Sign-in Process
 
-let signInLink = await pullLink(browser, "Google Sign In");
-await toGoogle(browser, String(signInLink));
+let signInLink = await pullLink(browser, "Google Log In");
+//await toGoogle(browser, String(signInLink));
 let mapOfTitlesAndURLs = await searchLinks(browser, "Joti Gokaraju");
 
 let url = [];
