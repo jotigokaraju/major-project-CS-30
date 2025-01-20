@@ -20,3 +20,23 @@ Users can search for a project and using some type of ranking algorithim, the be
 ## Diagram
 
 ![alt text](/textures/Diagram.png)
+
+
+# Adjusted Proposal
+
+I talked to Mr. Schellenberg about switching my project to the doxxing machine earlier. This is the updated proposal, slighlty modified for the new project. However, the core concepts remain the same.
+
+## Need to have
+
+- searching algorithim that can identify websites for people
+- deployed website that can perform searches of multiple people on multiple pages (i.e. not just limited to reading Facebook, it can look at Youtube, a company website, etc.)
+- LLM-based analysis of each person
+- Pleasent UI
+
+## Nice to have
+
+- Access to other extensions for information
+- Fast run times
+- Should be free, ideally.
+- Cool presentation, not animations, for the project.
+- The user can purchase from within the extension (need to figure out security). _(This is now irrelevant)_
