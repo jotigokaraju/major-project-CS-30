@@ -33,31 +33,39 @@ async function isPDFResponse(page, link) {
 }
 
 
-export async function HTML2PDF(browser, link, number) {
+export async function HTML2PDF(link, number) {
 
-  const outputPath = `../temp/output_${number}.pdf`;
-
+  const browser = (await puppeteer.launch({headless: false}));
   const page = await browser.newPage();
 
+  try {
+    const outputPath = `../temp/output_${number}.pdf`;
 
-  await page.setUserAgent(
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'
-  );
 
-  await page.setDefaultNavigationTimeout(0);
-  
-  //Wait for the page to load
-  await new Promise(resolve => setTimeout(resolve, 4000));
 
-  if (await isPDFResponse(page, link)) {
-    console.log('PDF detected after loading. Downloading directly...');
-    await page.close();
-    await downloadPDF(link, outputPath);
-  } else {
-    await page.pdf({ path: outputPath, format: 'A4' });
-    await page.close();
+    await page.setUserAgent(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'
+    );
+    
+    
+
+    if (await isPDFResponse(page, link)) {
+      console.log('PDF detected after loading. Downloading directly...');
+      await page.close();
+      await downloadPDF(link, outputPath);
+    } else {
+
+      //Wait for the page to load or until 4s max
+      await new Promise(resolve => setTimeout(resolve, 4000));
+
+      await page.pdf({path: outputPath, format: 'A4'});
+      
+
+    }
+
+    console.log(`PDF saved to: ${outputPath}`);
+    return outputPath;
+  } finally {
+    await browser.close();
   }
-
-  console.log(`PDF saved to: ${outputPath}`);
-  return outputPath;
 }

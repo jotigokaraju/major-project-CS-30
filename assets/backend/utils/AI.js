@@ -3,6 +3,7 @@ dotenv.config();
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleAIFileManager } from "@google/generative-ai/server";
 
+
 export async function query(prompt) {
 
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
@@ -10,7 +11,7 @@ export async function query(prompt) {
 
   const result = await model.generateContent(prompt);
   console.log(result.response.text());
-  return response.text();
+  return result.response.text();
 
 }
 
@@ -38,7 +39,8 @@ export async function summary(data) {
 
 }
 
-export async function understandPDF(person) {
+
+export async function understandPDF(person, pdfURL) {
  
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
@@ -50,7 +52,7 @@ export async function understandPDF(person) {
 
 
   const uploadResponse = await fileManager.uploadFile(
-    `../temp/output_0.pdf`,
+    pdfURL,
     {
       mimeType: "application/pdf",
       displayName: "Gemini 1.5 PDF",
@@ -71,7 +73,6 @@ export async function understandPDF(person) {
     { text: `Output everything related to ${person} from the file` }
   ]);
 
-  console.log(result.response.text());
-  return result.response.text();
+  console.log(await String(result.response.text().toString()));
+  return String(result.response.text().toString());
 }
-
