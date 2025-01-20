@@ -9,7 +9,7 @@ export async function searchLinks(browser, searchQuery) {
   try {
     
     await page.setRequestInterception(true);
-    await page.setJavaScriptEnabled(false);
+    //await page.setJavaScriptEnabled(false);
     page.on("request", request => {
       request.resourceType() === "document"
         ? request.continue()
@@ -22,7 +22,7 @@ export async function searchLinks(browser, searchQuery) {
 
     await page.type("textarea", searchQuery, {delay: 150});
     await page.$eval('[aria-label="Google Search"]', el => el.click());
-    const sel = ".Gx5Zad";
+    const sel = ".tF2Cxc";
     await page.waitForSelector(sel);
 
     let searchResults = await page.$$eval(sel, els =>
@@ -50,7 +50,12 @@ export async function searchLinks(browser, searchQuery) {
   catch(error) {
     console.log(error);
   }
-  
+
+  finally {
+    page.close();
+  }
+
+    
   
 }
 

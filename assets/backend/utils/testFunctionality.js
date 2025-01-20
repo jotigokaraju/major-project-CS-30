@@ -12,10 +12,8 @@ import {toGoogle} from '../utils/login.js';
 //Set Browser for All Pages
 const browser = await puppeteer.launch({headless: false});
 
-//Sign-in Process
-
 let signInLink = await pullLink(browser, "Google Log In");
-//await toGoogle(browser, String(signInLink));
+await toGoogle(browser, String(signInLink));
 let mapOfTitlesAndURLs = await searchLinks(browser, "Joti Gokaraju");
 
 let url = [];
