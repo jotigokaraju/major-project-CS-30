@@ -45,15 +45,16 @@ export async function HTML2PDF(browser, link, number) {
   );
 
   await page.setDefaultNavigationTimeout(0);
+  
+  //Wait for the page to load
+  await new Promise(resolve => setTimeout(resolve, 4000));
 
   if (await isPDFResponse(page, link)) {
     console.log('PDF detected after loading. Downloading directly...');
     await page.close();
     await downloadPDF(link, outputPath);
   } else {
-    
-    await page.pdf({path: outputPath, format: 'A4'});
-
+    await page.pdf({ path: outputPath, format: 'A4' });
     await page.close();
   }
 
