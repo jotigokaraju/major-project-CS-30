@@ -1,3 +1,9 @@
+
+import puppeteer from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+
+puppeteer.use(StealthPlugin());
+
 export async function toGoogle(browser, link) {
     const page = await browser.newPage();
     

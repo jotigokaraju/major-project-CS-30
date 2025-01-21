@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Doxxer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css" />
+    
+  </head>
+
+  <body>
+
+    
+    <header class="container">
+      <hgroup>
+        <h1>The Doxxing Machine</h1>
+        <p>Stalking just got so much easier.</p>
+      </hgroup>
+    </header>
+
+    <!-- Main -->
+
+    <p></p>
+
+
+    <main class="container">
+      
+        <section id="form">
+            <form>
+                <h2>Provide Information</h2>
+
+                <p>
+                  Provide the name of the person you're looking for and their rough geographic location.
+                </p>
+
+                <!-- Text -->
+                <label for="text">Name</label>
+                <input type="text" id="name" name="text" placeholder="John Doe" />
+                <small>Provide the name of the person you're looking for.</small>    
+                
+                <label for="text">Location</label>
+                <input type="text" id="location" name="text" placeholder="New York" />
+                <small>Provide the rough geographic location of the person you're looking for.</small>  
+
+                <label for="text">Occupation</label>
+                <input type="text" id="text" name="text" placeholder="Student at NYU" />
+                <small>Provide the occupation of the person you're looking for.</small>  
+
+                <!-- Range slider control -->
+                <label for="range"
+                >Select Depth of Search (For Basic Searches: 1; For Advanced Searches: 2-5)
+                <input type="range" min="0" max="5" value="1" id="range" name="range" />
+                </label>
+                <button type="submit">Search</button>
+
+            </form>
+        </section>
+        
+        <p></p>
+
+        <h1>The Results</h1>
+
+        <p></p>
+
+        <section id="progress" style="display: none;">
+            <h2>In Progress</h2>
+            <progress id="progress-2"></progress> <!-- Hidden by default -->
+        </section>
+
+        <article id="article">
+            <h2>Biography</h2>
+            <p id="bio"></p>
+            <footer>
+                <small>Warning: AI Generated Content Might be Wrong.</small>
+            </footer>
+        </article>
+
+        <article id="article">
+            <h2>Personal Life</h2>
+            <p id="personal"></p>
+            <footer>
+                <small>Warning: AI Generated Content Might be Wrong.</small>
+            </footer>
+        </article>
+
+        <article id="article">
+            <h2>Work and Occupation</h2>
+            <p id="work"></p>
+            <footer>
+                <small>Warning: AI Generated Content Might be Wrong.</small>
+            </footer>
+        </article>
+
+        <article id="article">
+            <h2>Fun Facts</h2>
+            <p id="facts"></p>
+            <footer>
+                <small>Warning: AI Generated Content Might be Wrong.</small>
+            </footer>
+        </article>
+
+        <article id="article">
+            <h2>Interests and Hobbies</h2>
+            <p id="interests"></p>            
+            <footer>
+                <small>Warning: AI Generated Content Might be Wrong.</small>
+            </footer>
+        </article>
+
+        
+      
+        
+        
+      
+      
+    </main>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

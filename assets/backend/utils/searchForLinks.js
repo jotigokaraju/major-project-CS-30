@@ -1,7 +1,5 @@
 //2024-12-13
 
-import puppeteer from "puppeteer";
-
 export async function searchLinks(browser, searchQuery) {
 
   const page = await browser.newPage();
@@ -49,8 +47,10 @@ export async function searchLinks(browser, searchQuery) {
 
   catch(error) {
     console.log(error);
+  } finally {
+    page.close();
   }
- 
+
   
 }
 

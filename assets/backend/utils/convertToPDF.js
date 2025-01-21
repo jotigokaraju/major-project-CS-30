@@ -1,8 +1,6 @@
 import fs from 'fs';
 import https from 'https';
-import puppeteer, { launch } from 'puppeteer';
-
-
+import puppeteer from 'puppeteer';
 async function downloadPDF(url, outputPath) {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(outputPath);
@@ -27,16 +25,22 @@ async function downloadPDF(url, outputPath) {
 }
 
 async function isPDFResponse(page, link) {
-  const response = await page.goto(link, {waitUntil: 'domcontentloaded'});
-  const contentType = response.headers()['content-type'];
-  return contentType && contentType.includes('application/pdf');
+  try {
+    const response = await page.goto(link, {waitUntil: 'domcontentloaded'});
+    const contentType = await response.headers()['content-type'];
+    return contentType && contentType.includes('application/pdf');
+  } catch(error) {
+    return false;
+  }
 }
 
 
 export async function HTML2PDF(link, number) {
 
-  const browser = (await puppeteer.launch({headless: false}));
+  const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
+  
+  
 
   try {
     const outputPath = `../temp/output_${number}.pdf`;
@@ -57,15 +61,14 @@ export async function HTML2PDF(link, number) {
 
       //Wait for the page to load or until 4s max
       await new Promise(resolve => setTimeout(resolve, 4000));
-
       await page.pdf({path: outputPath, format: 'A4'});
       
-
     }
 
     console.log(`PDF saved to: ${outputPath}`);
+    await page.close();
     return outputPath;
-  } finally {
-    await browser.close();
+  } catch(error) {
+    console.log('error:', error)
   }
 }
