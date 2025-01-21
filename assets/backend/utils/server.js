@@ -13,11 +13,13 @@ app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-let summarizedText = ["a", "b"];
+
+let summarizedText = [];
 let geminiAnalysis = [];
+
 // Define an endpoint to trigger the Puppeteer analysis
 app.post('/run-analysis', async (req, res) => {
-  const { searchQ } = req.body; // Get the search query from the request body
+  const {searchQ} = req.body; // Get the search query from the request body
   if (!searchQ) {
     return res.status(400).json({ error: 'Missing search query' });
   }
@@ -25,16 +27,36 @@ app.post('/run-analysis', async (req, res) => {
 
   try {
     // Launch Puppeteer browser
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({headless: true});
     
-    //let signInLink = await pullLink(browser, "Google Log In");
-    //await toGoogle(browser, String(signInLink));
+    //In the actual server, we cannot login to Google since headless must be set to false, otherwise we would need to pay for server-side GUI stuff.
+    let signInLink = await pullLink(browser, "Google Log In");
+    await toGoogle(browser, String(signInLink));
 
     // Perform search and processing
-    //await search(browser, searchQ, searchQ);
 
-    res.json({key: summarizedText});
+    let context;
+    let originalSearch;
 
+
+    // for (let layer = layers; layer > 0; layer--) {
+
+    //   if (layer === layers) {
+
+    //   } else {
+
+    //   }
+
+    // }
+
+
+    let searchResults = await search(browser, searchQ, searchQ);
+  
+    console.log('working', searchResults);
+    res.send(searchResults);
+    console.log("Sent?");
+    res.json(searchResults);
+    console.log("Sent, Again?");
     // Close the browser once done
     await browser.close();
   } catch (error) {
@@ -43,6 +65,9 @@ app.post('/run-analysis', async (req, res) => {
   }
 });
 
+function getLinks(browser, searchQ) {
+  
+}
 // Define the search function as provided in the original code
 async function search(browser, searchQ, originalSearch) {
   
@@ -61,7 +86,7 @@ async function search(browser, searchQ, originalSearch) {
     pdfLink = await HTML2PDF(link, url.indexOf(link));
     pdfText = await extractTextFromPDF(pdfLink);
     result.push(pdfText);
-    geminiAnalysis.push(understandPDF(originalSearch, pdfLink));
+    geminiAnalysis.push(await understandPDF(originalSearch, pdfLink));
     deletePDF(pdfLink);
     console.log(result);
   }
@@ -73,9 +98,29 @@ async function search(browser, searchQ, originalSearch) {
       continue;
     }
   }
+
+  let context = summarizedText.join(" ");
+  context += String(geminiAnalysis.join(" "));
+  console.log(context);
+  console.log('returning');
+  return context;
+  
+}
+
+async function informationProcess(context, originalSearch) {
+
+  let biography = await query(`Based on this context, create a short biography for ${originalSearch}. Output only the plain information in sentences, nothing else. No formatting. Context: ${context}`); 
+  let personalLife = await query(`Based on this context, create a personal life section for ${originalSearch}. Output only the plain information in sentences, nothing else. No formatting. Context: ${context}`); 
+  let factInfo = await query(`Based on this context, create some fun facts for ${originalSearch}. Output only the plain information in sentences, nothing else. No formatting. Context: ${context}`); 
+  let fearInfo = await query(`Based on this context, what do you this the fears are for ${originalSearch}. Output only the plain information in sentences, nothing else. No formatting. Context: ${context}`); 
+  let workInfo = await query(`Based on this context, create a work/schooling information section for ${originalSearch}. Output only the plain information in sentences, nothing else. No formatting. Context: ${context}`);
+
+  return {bio: biography, work: workInfo, personal: personalLife, facts: factInfo, fears: fearInfo}
 }
 
 // Start the server
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+server.timeout = 0;
+

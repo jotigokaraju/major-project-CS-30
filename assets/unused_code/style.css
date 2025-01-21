@@ -1,0 +1,239 @@
+a.style1{
+    color: #0753D1;
+  
+    text-decoration: none;
+  
+  }
+  
+  
+  
+  a.style1:visited{
+  
+    color: #0645AD;
+  
+    text-decoration: none;
+  
+  }
+  
+  
+  
+  a.style1:active{
+  
+    color: #0645AD;
+  
+    text-decoration: none;
+  
+  }
+  
+  
+  
+  a.style1:hover{
+  
+    color: #0645AD;
+  
+    text-decoration: none;
+  
+  }
+  
+  
+  
+  a.style2{
+  
+    color: #0645AD;
+  
+    text-decoration: none;
+  
+  }
+  
+  
+  
+  a.style2:visited{
+  
+    color: #0645AD;
+  
+    text-decoration: none;
+  
+  }
+  
+  
+  
+  a.style2:active{
+  
+    color: #0645AD;
+  
+    text-decoration: none;
+  
+  }
+  
+  
+  
+  a.style2:hover{
+  
+    color: #0645AD;
+  
+    text-decoration: none;
+  
+  }
+  
+  
+  
+  h1, .h1{
+  
+    font-family: Arial;
+  
+    font-weight: bold;
+  
+    font-size: 32px;
+  
+    text-decoration: none;
+  
+    color: #000000;
+  
+    background-color: transparent;
+  
+    margin: 0px 0px 0px 0px;
+  
+    padding: 0px 0px 0px 0px;
+  
+    display: inline;
+  
+  }
+  
+  
+  
+  h2, .h2{
+  
+    font-family: Arial;
+  
+    font-weight: bold;
+  
+    font-size: 27px;
+  
+    text-decoration: none;
+  
+    color: #000000;
+  
+    background-color: transparent;
+  
+    margin: 0px 0px 0px 0px;
+  
+    padding: 0px 0px 0px 0px;
+  
+    display: inline;
+  
+  }
+  
+  
+  
+  h3, .h3{
+  
+    font-family: Arial;
+  
+    font-weight: bold;
+  
+    font-size: 24px;
+  
+    text-decoration: none;
+  
+    color: #000000;
+  
+    background-color: transparent;
+  
+    margin: 0px 0px 0px 0px;
+  
+    padding: 0px 0px 0px 0px;
+  
+    display: inline;
+  
+  }
+  
+  
+  
+  h4, .h4{
+  
+    font-family: Arial;
+  
+    font-weight: bold;
+  
+    font-size: 21px;
+  
+    text-decoration: none;
+  
+    color: #000000;
+  
+    background-color: transparent;
+  
+    margin: 0px 0px 0px 0px;
+  
+    padding: 0px 0px 0px 0px;
+  
+    display: inline;
+  
+  }
+  
+  
+  
+  
+  h5, .h5{
+  
+    font-family: Arial;
+  
+    font-weight: bold;
+  
+    font-size: 19px;
+  
+    text-decoration: none;
+  
+    color: #000000;
+  
+    background-color: transparent;
+  
+    margin: 0px 0px 0px 0px;
+  
+    padding: 0px 0px 0px 0px;
+  
+    display: inline;
+  
+  }
+  
+  
+  
+  h6, .h6{
+  
+    font-family: Arial;
+  
+    font-weight: bold;
+  
+    font-size: 16px;
+  
+    text-decoration: none;
+  
+    color: #000000;
+  
+    background-color: transparent;
+  
+    margin: 0px 0px 0px 0px;
+  
+    padding: 0px 0px 0px 0px;
+  
+    display: inline;
+  
+  }
+  
+  
+  
+  .CustomStyle{
+  
+    font-family: "Courier New";
+  
+    font-weight: bold;
+  
+    font-size: 16px;
+  
+    text-decoration: none;
+  
+    color: #2E74B5;
+  
+    background-color: transparent;
+  
+  }

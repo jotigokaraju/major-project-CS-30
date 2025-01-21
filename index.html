@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Doxxer</title>
+    <!-- Pico.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css" />
+  </head>
+
+  <body>
+    <header class="container">
+      <hgroup>
+        <h1>The Doxxing Machine</h1>
+        <p>Stalking just got so much easier.</p>
+      </hgroup>
+    </header>
+
+    <!-- Main -->
+    <main class="container">
+      <!-- Preview -->
+      <section id="preview">
+        <h2>Provide Information</h2>
+        <p>
+          Provide the name of the person you're looking for and their rough geographic location.
+        </p>
+        <form id="userForm">
+          <div class="grid">
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              placeholder="Name"
+              aria-label="First name"
+              required
+            />
+            <input
+              type="text"
+              id="location"
+              name="firstname"
+              placeholder="Rough Geographic Location"
+              aria-label="First name"
+              required
+            />
+            <input
+              type="text"
+              id="occuptation"
+              name="firstname"
+              placeholder="i.e. student, teacher"
+              aria-label="First name"
+              required
+            />
+        
+            <button type="submit">Search</button>
+          </div>
+        </form>
+      </section>
+
+      <h1>Information Found</h1>
+      <h2>Bio</h2>
+      <p id="bio"></p>
+      <h2>Personal Life</h2>
+      <p id="personal"></p>
+      <h2>Work and Schooling</h2>
+      <p id="work"></p>
+      <h2>Fun Facts</h2>
+      <p id="facts"></p>
+      <h2>Fears</h2>
+      <p id="fears"></p>
+      
+    </main>
+
+    <script type="module" src="assets/backend/utils/main.js"></script>
+  </body>
+</html>
